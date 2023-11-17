@@ -1,0 +1,10 @@
+import chess
+
+# Initialize the chess board
+board = chess.Board()
+
+# Game loop
+while not board.is_game_over():
+    print(board)
+
+    # Get user input 
