@@ -1,0 +1,28 @@
+import chess
+
+# Initialize the chess board
+board = chess.Board()
+
+# Game loop
+while not board.is_game_over():
+    print(board)
+
+    # Get user input for their move
+    user_move = input("Enter your move (e.g. e2e4): ")
+
+    # Validate and make the user's move
+    try:
+        move = chess.Move.from_uci(user_move)
+        if move in board.legal_moves:
+            board.push(move)
+        else:
+            raise ValueError("Invalid move")
+    except ValueError as e:
+        print(e)
+        continue
+
+    # Generate and make the computer's move
+    computer_move = chess.engine.SimpleEngine().play(board, chess.engine.Limit(time=2))
+    board.push(computer_move.move)
+    
+print("Game Over!")
